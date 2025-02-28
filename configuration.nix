@@ -11,12 +11,13 @@
       inputs.rke2.nixosModules.default
     ];
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
-  systemd.services.containerd.path=with pkgs;[iptables nvidia-docker libnvidia-container];
+  nix.settings = {
+    trusted-users = ["@wheel"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
 
   nixpkgs.config.allowUnfree = true;
   
